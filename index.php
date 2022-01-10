@@ -35,18 +35,53 @@ class LonelyPlanet extends Book{
 
         $this->lastUpdate = $lastUpdate;
     }
+    
+    #sovrascrittura parziale per le guide turistiche
+    public function getSales($sale) {
+        $discount = parent::getSales($sale);
 
+        return $discount - 3;
+    }
+
+}
+
+class Comics extends Book{
+
+    public $genre;
+
+    public function __construct($title,$author,$price,$genre) {
+
+        parent::__construct($title,$author,$price);
+
+        $this->genre = $genre;
+    }
+
+    public function getSales($sale) {
+        $discount = parent::getSales($sale);
+
+        return $discount - 1.5;
+    }
 }
 
 //instanza da padre
 $book = new Book ('CUJO','Stephen King',15);
+var_dump($book);
 
 echo 'Prezzo scontato:' . $book->getSales(10);
 
 //instanza da figlio/eredito
 $Japan = new LonelyPlanet('Giappone','LonelyPlanet', 34, 2018);
 var_dump($Japan);
+echo "Prezzo scontato LonelyPlanet:" . $Japan->getSales(25) . '<br>';
 
-echo "Prezzo scontato:" . $Japan->getSales(25);
+$Vietnam = new LonelyPlanet('Vietnam','LonelyPlanet',31,2020);
+
+echo "Prezzo scontato LonelyPlanet:" . $Vietnam->getSales(25);
+
+$Manga = new Comics('CITY HUNTER','Tsukasa Ohio',15,'Manga');
+var_dump($Manga);
+
+
+
 
 ?>
